@@ -54,13 +54,6 @@ export default function Facilities() {
       iconColor: "bg-ocean-blue"
     },
     {
-      icon: Wifi,
-      title: "Free WiFi",
-      description: "High-speed internet throughout the park",
-      gradient: "from-sunset-orange/10 to-coral/10",
-      iconColor: "bg-sunset-orange"
-    },
-    {
       icon: Utensils,
       title: "Food Court",
       description: "Variety of dining options and snacks",

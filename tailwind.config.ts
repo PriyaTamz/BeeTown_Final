@@ -11,6 +11,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        'ocean-blue': '#0077b6',
         background: "var(--background)",
         foreground: "var(--foreground)",
         card: {
