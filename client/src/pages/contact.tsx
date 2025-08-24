@@ -4,19 +4,6 @@ export default function Contact() {
   
   return (
     <div className="pt-16">
-      {/* Hero Section */}
-      <div className="relative h-80 md:h-96 w-full bg-gradient-to-r from-blue-500 to-orange-500 flex items-center justify-center">
-        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-          <div className="text-center px-4 max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Contact Us
-            </h1>
-            <p className="text-lg md:text-xl text-white/90">
-              Get in touch with our friendly team for any inquiries or feedback
-            </p>
-          </div>
-        </div>
-      </div>
 
       {/* Contact Section */}
       <section className="py-16 md:py-24 bg-white">

@@ -1,100 +1,83 @@
-import { 
-  Shirt, 
-  Droplets, 
-  Plus, 
-  Car, 
-  Lock, 
-  ShowerHead, 
-  Wifi, 
-  Utensils 
+import {
+  Shirt,
+  Droplets,
+  Plus,
+  Car,
+  Lock,
+  ShowerHead,
+  Wifi,
+  Utensils,
 } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 export default function Facilities() {
   const facilities = [
-    {
-      icon: Shirt,
-      title: "Changing Rooms",
-      description: "Clean, spacious changing facilities with lockers",
-      gradient: "from-sky-blue/10 to-ocean-blue/10",
-      iconColor: "bg-ocean-blue"
-    },
-    {
-      icon: Droplets,
-      title: "Drinking Water",
-      description: "Purified water stations throughout the park",
-      gradient: "from-sunset-orange/10 to-coral/10",
-      iconColor: "bg-sunset-orange"
-    },
-    {
-      icon: Plus,
-      title: "First Aid",
-      description: "Professional medical assistance available",
-      gradient: "from-tropical-green/10 to-warm-yellow/10",
-      iconColor: "bg-tropical-green"
-    },
-    {
-      icon: Car,
-      title: "Parking",
-      description: "Secure parking for cars and two-wheelers",
-      gradient: "from-coral/10 to-sunset-orange/10",
-      iconColor: "bg-coral"
-    },
-    {
-      icon: Lock,
-      title: "Individual Lockers",
-      description: "Personal storage for your belongings",
-      gradient: "from-warm-yellow/10 to-tropical-green/10",
-      iconColor: "bg-warm-yellow"
-    },
-    {
-      icon: ShowerHead,
-      title: "ShowerHead Areas",
-      description: "Hot and cold water shower facilities",
-      gradient: "from-ocean-blue/10 to-sky-blue/10",
-      iconColor: "bg-ocean-blue"
-    },
-    {
-      icon: Utensils,
-      title: "Food Court",
-      description: "Variety of dining options and snacks",
-      gradient: "from-tropical-green/10 to-warm-yellow/10",
-      iconColor: "bg-tropical-green"
-    }
+    { icon: Shirt, title: "Changing Rooms" },
+    { icon: Droplets, title: "Drinking Water" },
+    { icon: Plus, title: "First Aid" },
+    { icon: Car, title: "Parking" },
+    { icon: Lock, title: "Individual Lockers" },
+    { icon: ShowerHead, title: "Shower Areas" },
+    { icon: Utensils, title: "Food Court" },
+    { icon: Wifi, title: "Free WiFi" },
   ];
 
-  return (
-    <div className="pt-16">
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-ocean-blue mb-4">
-              Park Facilities
-            </h2>
-            <p className="text-xl text-gray-600">
-              Everything you need for a comfortable visit
-            </p>
-          </div>
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const indexRef = useRef(0);
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {facilities.map((facility, index) => (
-              <div
-                key={index}
-                className={`bg-gradient-to-br ${facility.gradient} p-6 rounded-2xl text-center hover:shadow-lg transition-shadow duration-300`}
-              >
-                <div className={`w-16 h-16 ${facility.iconColor} rounded-full flex items-center justify-center mx-auto mb-4`}>
-                  <facility.icon className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="font-semibold text-gray-800 mb-2">
-                  {facility.title}
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  {facility.description}
-                </p>
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (scrollRef.current) {
+        const nextIndex = (indexRef.current + 1) % facilities.length;
+        indexRef.current = nextIndex;
+
+        const facilityElement = scrollRef.current.children[
+          nextIndex
+        ] as HTMLElement;
+
+        const offsetLeft = facilityElement.offsetLeft;
+        scrollRef.current.scrollTo({
+          left: offsetLeft,
+          behavior: "smooth",
+        });
+      }
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="bg-blue-600 py-16">
+      <div className="text-center mb-10 px-4 sm:px-6">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+          Facilities
+        </h2>
+        <p className="text-base sm:text-lg md:text-xl text-blue-100 max-w-2xl mx-auto">
+          Enjoy a wide range of guest-friendly amenities designed to make your
+          visit comfortable, safe, and memorable.
+        </p>
+      </div>
+
+      <div className="overflow-x-hidden">
+        <div
+          ref={scrollRef}
+          className="flex space-x-6 overflow-x-auto px-4 sm:px-6 lg:px-8 max-w-screen-xl mx-auto scrollbar-hide snap-x snap-mandatory"
+        >
+          {facilities.map((facility, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center justify-center text-center space-y-3 min-w-[7rem] sm:min-w-[9rem] md:min-w-[10rem] lg:min-w-[11rem] flex-shrink-0 snap-center"
+            >
+              <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 flex items-center justify-center rounded-full bg-white shadow-lg border-2 border-white transition-transform hover:scale-105 duration-300">
+                <facility.icon className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 lg:h-12 lg:w-12 text-blue-600" />
               </div>
-            ))}
-          </div>
+              <h3 className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-white">
+                {facility.title}
+              </h3>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
     </div>
   );
 }
