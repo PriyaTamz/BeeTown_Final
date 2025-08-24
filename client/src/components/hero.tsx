@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import image1 from "@/videos/sea.avif";
-import image2 from "@/videos/bridge.avif";
+import image3 from "../videos/image3.png"
+import image5 from "../videos/image5.png"
 
-const images = [image1, image2];
+const images = [image3, image5];
 
 export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -44,9 +44,9 @@ export default function Hero() {
   }, [isTransitioning]);
 
   return (
-    <section className="relative w-full h-[70vh] sm:h-[85vh] lg:h-screen overflow-hidden">
+    <section className="relative w-full h-[70vh] sm:h-[85vh] lg:h-screen overflow-hidden bg-black">
       {/* Images with vertical slide transitions */}
-      <div className="absolute w-full h-full max-h-screen">
+      <div className="absolute inset-0 w-full h-full bg-black/60 backdrop-blur-md">
         {images.map((src, index) => (
           <div
             key={index}
